@@ -1,13 +1,21 @@
 export const COLORS = {
-  // Base colors
-  background: '#0a0a0a',
-  surface: '#1a1a1a',
-  surfaceLight: '#252525',
+  // Grand Luxe: Nuit Profonde (Deep Dark) base colors
+  background: '#0a0a0f', // Nuit Profonde
+  surface: '#151520',
+  surfaceLight: '#1f1f2e',
+  surfaceDark: '#0d0d14',
 
-  // Gold/Yellow accents
-  gold: '#D4AF37',
-  goldLight: '#F4D03F',
-  goldDark: '#B8962E',
+  // 24K Gold accents
+  gold: '#FFD700',
+  gold24K: '#FFDF00',
+  goldLight: '#FFED4E',
+  goldDark: '#CCB000',
+  goldShimmer: '#FFF8DC',
+
+  // Electric Blue accents
+  electricBlue: '#00E5FF',
+  electricBlueDark: '#00B8D4',
+  electricBlueLight: '#6EFEFF',
 
   // Neon accents
   neonPurple: '#A855F7',
@@ -16,22 +24,32 @@ export const COLORS = {
   neonGreen: '#10B981',
   neonBlue: '#3B82F6',
 
+  // Luxury accents
+  platinum: '#E5E4E2',
+  diamond: '#B9F2FF',
+  ruby: '#E0115F',
+  sapphire: '#0F52BA',
+
   // Status colors
   success: '#10B981',
   warning: '#F59E0B',
   error: '#EF4444',
-  info: '#3B82F6',
+  info: '#00E5FF',
 
   // Text colors
   textPrimary: '#FFFFFF',
-  textSecondary: '#A0A0A0',
-  textTertiary: '#666666',
+  textSecondary: '#B0B0C0',
+  textTertiary: '#707080',
+  textGold: '#FFD700',
+  textElectric: '#00E5FF',
 
   // Chart colors
   chartGreen: '#10B981',
   chartRed: '#EF4444',
   chartPurple: '#A855F7',
   chartOrange: '#F59E0B',
+  chartBlue: '#00E5FF',
+  chartGold: '#FFD700',
 };
 
 export const FONTS = {

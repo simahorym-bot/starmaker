@@ -5,7 +5,7 @@ import { COLORS, SIZES } from '@/constants/theme';
 interface ButtonProps {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'gold' | 'neon' | 'danger';
+  variant?: 'primary' | 'secondary' | 'gold' | 'neon' | 'danger' | 'electric';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   loading?: boolean;
@@ -32,6 +32,8 @@ export const Button: React.FC<ButtonProps> = ({
         return COLORS.neonPurple;
       case 'danger':
         return COLORS.error;
+      case 'electric':
+        return COLORS.electricBlue;
       case 'secondary':
         return COLORS.surfaceLight;
       default:

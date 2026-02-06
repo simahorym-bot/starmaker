@@ -17,11 +17,12 @@ import { ProgressBar } from '@/components/ui/ProgressBar';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useLocale } from '@/hooks/useLocale';
 import { MusicVideo, FashionLine, PopupStore } from '@/types/game';
+import { TrophyWall } from '@/components/TrophyWall';
 
 export default function ProductionScreen() {
   const t = useLocale();
   const { gameState, updateGameState } = useGame();
-  const [selectedTab, setSelectedTab] = useState<'video' | 'fashion' | 'legacy'>('video');
+  const [selectedTab, setSelectedTab] = useState<'video' | 'fashion' | 'legacy' | 'trophies'>('video');
 
   if (!gameState) return null;
 
@@ -245,13 +246,32 @@ export default function ProductionScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity
+            style={[styles.tab, selectedTab === 'trophies' && styles.tabActive]}
+            onPress={() => setSelectedTab('trophies')}
+          >
+            <MaterialCommunityIcons
+              name="trophy-variant"
+              size={20}
+              color={selectedTab === 'trophies' ? COLORS.gold24K : COLORS.textSecondary}
+            />
+            <Text
+              style={[
+                styles.tabText,
+                selectedTab === 'trophies' && styles.tabTextActive,
+              ]}
+            >
+              Trophées
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             style={[styles.tab, selectedTab === 'legacy' && styles.tabActive]}
             onPress={() => setSelectedTab('legacy')}
           >
             <MaterialCommunityIcons
               name="star-box"
               size={20}
-              color={selectedTab === 'legacy' ? COLORS.gold : COLORS.textSecondary}
+              color={selectedTab === 'legacy' ? COLORS.gold24K : COLORS.textSecondary}
             />
             <Text
               style={[
@@ -350,6 +370,11 @@ export default function ProductionScreen() {
               </>
             )}
           </View>
+        )}
+
+        {/* Trophy Wall Tab */}
+        {selectedTab === 'trophies' && (
+          <TrophyWall gameState={gameState} />
         )}
 
         {/* Fashion Tab */}

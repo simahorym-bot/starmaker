@@ -16,11 +16,13 @@ import { ProgressBar } from '@/components/ui/ProgressBar';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useLocale } from '@/hooks/useLocale';
 import { Contract, StudioRoom } from '@/types/game';
+import { ProfitLossDashboard } from '@/components/ProfitLossDashboard';
+import { StudioInventory } from '@/components/StudioInventory';
 
 export default function LabelScreen() {
   const t = useLocale();
   const { gameState, updateGameState } = useGame();
-  const [selectedTab, setSelectedTab] = useState<'equipment' | 'rooms' | 'contracts'>('equipment');
+  const [selectedTab, setSelectedTab] = useState<'equipment' | 'rooms' | 'contracts' | 'pnl' | 'inventory'>('equipment');
 
   if (!gameState) return null;
 
@@ -211,6 +213,32 @@ export default function LabelScreen() {
     Alert.alert(t.notifications.contractSigned, `Contrat signé avec ${template.partner} !`);
   };
 
+  const handleInventoryPurchase = async (itemId: string, cost: number, qualityBoost: number) => {
+    await updateGameState({
+      ...gameState,
+      artist: {
+        ...artist,
+        money: artist.money - cost,
+      },
+      studio: {
+        ...studio,
+        upgrades: [
+          ...(studio.upgrades || []),
+          {
+            id: itemId,
+            name: itemId,
+            level: 1,
+            cost,
+            benefit: `+${qualityBoost}% qualité`,
+          },
+        ],
+        soundFidelity: Math.min((studio.soundFidelity || 50) + qualityBoost, 100),
+      },
+    });
+
+    Alert.alert(t.common.success, 'Équipement acheté avec succès !');
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -226,64 +254,114 @@ export default function LabelScreen() {
         </View>
 
         {/* Tabs */}
-        <View style={styles.tabs}>
-          <TouchableOpacity
-            style={[styles.tab, selectedTab === 'equipment' && styles.tabActive]}
-            onPress={() => setSelectedTab('equipment')}
-          >
-            <MaterialCommunityIcons
-              name="microphone"
-              size={20}
-              color={selectedTab === 'equipment' ? COLORS.gold : COLORS.textSecondary}
-            />
-            <Text
-              style={[
-                styles.tabText,
-                selectedTab === 'equipment' && styles.tabTextActive,
-              ]}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.tabsScroll}>
+          <View style={styles.tabs}>
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'pnl' && styles.tabActive]}
+              onPress={() => setSelectedTab('pnl')}
             >
-              {t.label.equipment.title}
-            </Text>
-          </TouchableOpacity>
+              <MaterialCommunityIcons
+                name="chart-line"
+                size={20}
+                color={selectedTab === 'pnl' ? COLORS.gold24K : COLORS.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === 'pnl' && styles.tabTextActive,
+                ]}
+              >
+                P&L
+              </Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.tab, selectedTab === 'rooms' && styles.tabActive]}
-            onPress={() => setSelectedTab('rooms')}
-          >
-            <MaterialCommunityIcons
-              name="office-building"
-              size={20}
-              color={selectedTab === 'rooms' ? COLORS.gold : COLORS.textSecondary}
-            />
-            <Text
-              style={[
-                styles.tabText,
-                selectedTab === 'rooms' && styles.tabTextActive,
-              ]}
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'inventory' && styles.tabActive]}
+              onPress={() => setSelectedTab('inventory')}
             >
-              {t.label.specializedRooms}
-            </Text>
-          </TouchableOpacity>
+              <MaterialCommunityIcons
+                name="toolbox"
+                size={20}
+                color={selectedTab === 'inventory' ? COLORS.gold24K : COLORS.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === 'inventory' && styles.tabTextActive,
+                ]}
+              >
+                Inventaire
+              </Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.tab, selectedTab === 'contracts' && styles.tabActive]}
-            onPress={() => setSelectedTab('contracts')}
-          >
-            <MaterialCommunityIcons
-              name="file-document"
-              size={20}
-              color={selectedTab === 'contracts' ? COLORS.gold : COLORS.textSecondary}
-            />
-            <Text
-              style={[
-                styles.tabText,
-                selectedTab === 'contracts' && styles.tabTextActive,
-              ]}
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'equipment' && styles.tabActive]}
+              onPress={() => setSelectedTab('equipment')}
             >
-              {t.label.contracts}
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <MaterialCommunityIcons
+                name="microphone"
+                size={20}
+                color={selectedTab === 'equipment' ? COLORS.gold24K : COLORS.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === 'equipment' && styles.tabTextActive,
+                ]}
+              >
+                {t.label.equipment.title}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'rooms' && styles.tabActive]}
+              onPress={() => setSelectedTab('rooms')}
+            >
+              <MaterialCommunityIcons
+                name="office-building"
+                size={20}
+                color={selectedTab === 'rooms' ? COLORS.gold24K : COLORS.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === 'rooms' && styles.tabTextActive,
+                ]}
+              >
+                {t.label.specializedRooms}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'contracts' && styles.tabActive]}
+              onPress={() => setSelectedTab('contracts')}
+            >
+              <MaterialCommunityIcons
+                name="file-document"
+                size={20}
+                color={selectedTab === 'contracts' ? COLORS.gold24K : COLORS.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === 'contracts' && styles.tabTextActive,
+                ]}
+              >
+                {t.label.contracts}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
+        {/* P&L Dashboard Tab */}
+        {selectedTab === 'pnl' && (
+          <ProfitLossDashboard gameState={gameState} />
+        )}
+
+        {/* Studio Inventory Tab */}
+        {selectedTab === 'inventory' && (
+          <StudioInventory gameState={gameState} onPurchase={handleInventoryPurchase} />
+        )}
 
         {/* Equipment Tab */}
         {selectedTab === 'equipment' && (
@@ -515,10 +593,13 @@ const styles = StyleSheet.create({
     marginLeft: SIZES.spacing.xs,
     fontSize: SIZES.sm,
   },
+  tabsScroll: {
+    marginBottom: SIZES.spacing.xl,
+  },
   tabs: {
     flexDirection: 'row',
     gap: SIZES.spacing.sm,
-    marginBottom: SIZES.spacing.xl,
+    paddingRight: SIZES.spacing.lg,
   },
   tab: {
     flex: 1,
