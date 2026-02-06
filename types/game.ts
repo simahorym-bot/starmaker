@@ -18,21 +18,41 @@ export interface Team {
   manager: TeamMember | null;
   engineer: TeamMember | null;
   publicist: TeamMember | null;
+  creativeDirector: TeamMember | null;
+  digitalStrategist: TeamMember | null;
+  pressAttache: TeamMember | null;
+  tourManager: TeamMember | null;
+  bodyguards: TeamMember | null;
 }
 
 export interface TeamMember {
   id: string;
   name: string;
-  role: 'manager' | 'engineer' | 'publicist';
+  role: 'manager' | 'engineer' | 'publicist' | 'creative-director' | 'digital-strategist' | 'press-attache' | 'tour-manager' | 'bodyguards';
   skill: number;
   salary: number;
   hiredDate: number;
+  boost?: {
+    type: 'visuals' | 'virality' | 'press' | 'tour-efficiency' | 'security';
+    value: number;
+  };
 }
 
 export interface Studio {
   quality: number;
   equipment: Equipment[];
   upgrades: StudioUpgrade[];
+  rooms: StudioRoom[];
+  soundFidelity: number;
+}
+
+export interface StudioRoom {
+  id: string;
+  name: string;
+  type: 'vocal-booth' | 'live-room' | 'writing-room';
+  level: number;
+  boost: number;
+  owned: boolean;
 }
 
 export interface Equipment {
@@ -63,6 +83,24 @@ export interface Song {
   chartPosition: number;
   lyrics?: string;
   coverArt?: string;
+  releaseStrategy?: 'lead-single' | 'album' | 'deluxe';
+  physicalSales?: PhysicalSales;
+  musicVideo?: MusicVideo;
+}
+
+export interface PhysicalSales {
+  vinyl: number;
+  cd: number;
+  vinylRevenue: number;
+  cdRevenue: number;
+}
+
+export interface MusicVideo {
+  id: string;
+  director: string;
+  budget: number;
+  views: number;
+  quality: number;
 }
 
 export interface Fanbase {
@@ -125,19 +163,41 @@ export interface Comment {
 export interface Relationship {
   id: string;
   name: string;
-  type: 'collaboration' | 'rivalry' | 'romance';
+  type: 'collaboration' | 'rivalry' | 'romance' | 'entourage';
   affinity: number;
   interactions: number;
+  aiGenerated?: boolean;
+  impactOnCareer?: 'positive' | 'negative' | 'neutral';
 }
 
 export interface LuxuryItem {
   id: string;
   name: string;
-  category: 'car' | 'jet' | 'villa' | 'penthouse';
+  category: 'car' | 'jet' | 'yacht' | 'villa' | 'penthouse' | 'mansion';
   prestige: number;
   cost: number;
   owned: boolean;
   image?: string;
+  canHostParty?: boolean;
+}
+
+export interface BusinessInvestment {
+  id: string;
+  name: string;
+  type: 'stocks' | 'real-estate' | 'crypto' | 'business';
+  invested: number;
+  currentValue: number;
+  returns: number;
+}
+
+export interface BrandDeal {
+  id: string;
+  brand: string;
+  type: 'watches' | 'cosmetics' | 'fashion' | 'tech';
+  value: number;
+  duration: number;
+  prestige: number;
+  active: boolean;
 }
 
 export interface Merchandise {
@@ -147,6 +207,31 @@ export interface Merchandise {
   price: number;
   unitsSold: number;
   revenue: number;
+  design?: string;
+}
+
+export interface FashionLine {
+  id: string;
+  name: string;
+  pieces: FashionPiece[];
+  launched: boolean;
+  revenue: number;
+}
+
+export interface FashionPiece {
+  id: string;
+  name: string;
+  type: 'tshirt' | 'hoodie' | 'jacket' | 'pants' | 'shoes' | 'accessories';
+  price: number;
+  design: string;
+}
+
+export interface PopupStore {
+  id: string;
+  city: 'Paris' | 'Tokyo' | 'NYC' | 'London' | 'Milan';
+  opened: boolean;
+  revenue: number;
+  duration: number;
 }
 
 export interface Tour {
@@ -171,11 +256,27 @@ export interface Venue {
 
 export interface MediaEvent {
   id: string;
-  type: 'radio' | 'tv' | 'press';
+  type: 'radio' | 'tv' | 'press' | 'late-show' | 'press-conference';
   name: string;
   impact: number;
   timestamp: number;
   description: string;
+  aiGenerated?: boolean;
+}
+
+export interface PressConference {
+  id: string;
+  questions: PressQuestion[];
+  answers: string[];
+  impact: number;
+  timestamp: number;
+}
+
+export interface PressQuestion {
+  id: string;
+  journalist: string;
+  question: string;
+  category: 'career' | 'personal' | 'controversy' | 'future';
 }
 
 export interface Award {
@@ -184,6 +285,17 @@ export interface Award {
   category: string;
   year: number;
   won: boolean;
+}
+
+export interface Contract {
+  id: string;
+  type: 'distribution' | 'licensing' | 'publishing' | 'sync';
+  partner: string;
+  royaltyRate: number;
+  value: number;
+  duration: number;
+  signed: boolean;
+  earnings: number;
 }
 
 export interface GameState {
@@ -199,5 +311,12 @@ export interface GameState {
   tours: Tour[];
   mediaEvents: MediaEvent[];
   awards: Award[];
+  contracts: Contract[];
+  businessInvestments: BusinessInvestment[];
+  brandDeals: BrandDeal[];
+  fashionLines: FashionLine[];
+  popupStores: PopupStore[];
+  pressConferences: PressConference[];
+  retirementProgress: number;
   lastSaved: number;
 }

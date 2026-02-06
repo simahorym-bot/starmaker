@@ -20,7 +20,7 @@ export default function TabLayout() {
           height: 60 + insets.bottom,
         },
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 9,
           fontWeight: '600',
         },
       }}
@@ -28,9 +28,63 @@ export default function TabLayout() {
       <Tabs.Screen
         name="dashboard"
         options={{
-          title: 'Dashboard',
+          title: 'Tableau',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="view-dashboard" size={size} color={color} />
+            <MaterialCommunityIcons name="view-dashboard" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="label"
+        options={{
+          title: 'Label',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="music-box" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="analytics"
+        options={{
+          title: 'Analytics',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="chart-line" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="lifestyle"
+        options={{
+          title: 'Luxe',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="crown" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="relationships"
+        options={{
+          title: 'Relations',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-group" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="fanbase"
+        options={{
+          title: 'Fans',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="people" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="production"
+        options={{
+          title: 'Production',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="video" size={20} color={color} />
           ),
         }}
       />
@@ -39,53 +93,42 @@ export default function TabLayout() {
         options={{
           title: 'Studio',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="musical-notes" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="media"
-        options={{
-          title: 'Media',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="tv" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="merch"
-        options={{
-          title: 'Merch',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="shirt" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="tour"
-        options={{
-          title: 'Tour',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="airplane" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="social"
-        options={{
-          title: 'Social',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
+            <Ionicons name="musical-notes" size={20} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: 'Profil',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
+            <Ionicons name="person" size={20} color={color} />
           ),
+        }}
+      />
+      {/* Legacy screens - hide from tab bar */}
+      <Tabs.Screen
+        name="media"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="merch"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="tour"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="social"
+        options={{
+          href: null,
         }}
       />
     </Tabs>

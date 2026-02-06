@@ -16,7 +16,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTextGeneration } from '@fastshot/ai';
 import { MediaEvent } from '@/types/game';
 
-type MediaType = 'radio' | 'tv' | 'press';
+type MediaType = 'radio' | 'tv' | 'press' | 'late-show' | 'press-conference';
 
 const MEDIA_OPPORTUNITIES = {
   radio: [
@@ -33,6 +33,16 @@ const MEDIA_OPPORTUNITIES = {
     { name: 'Blog Feature', impact: 5, cost: 2000 },
     { name: 'Magazine Interview', impact: 25, cost: 12000 },
     { name: 'Rolling Stone Cover', impact: 150, cost: 100000 },
+  ],
+  'late-show': [
+    { name: 'Jimmy Fallon Show', impact: 60, cost: 35000 },
+    { name: 'The Tonight Show', impact: 75, cost: 50000 },
+    { name: 'Saturday Night Live', impact: 120, cost: 85000 },
+  ],
+  'press-conference': [
+    { name: 'Album Announcement', impact: 40, cost: 20000 },
+    { name: 'Tour Reveal', impact: 55, cost: 28000 },
+    { name: 'Major Career Update', impact: 90, cost: 60000 },
   ],
 };
 

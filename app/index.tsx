@@ -20,8 +20,9 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>⭐</Text>
-      <Text style={styles.title}>Starmaker</Text>
+      <Text style={styles.logo}>👑</Text>
+      <Text style={styles.title}>Music Tycoon</Text>
+      <Text style={styles.tagline}>Bâtissez Votre Empire Musical</Text>
       <ActivityIndicator size="large" color={COLORS.gold} style={{ marginTop: 20 }} />
     </View>
   );
@@ -42,5 +43,11 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '700',
     color: COLORS.gold,
+  },
+  tagline: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+    marginTop: 8,
   },
 });

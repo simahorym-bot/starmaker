@@ -24,12 +24,19 @@ export const initializeNewGame = (artistName: string, stageName: string, genre: 
     manager: null,
     engineer: null,
     publicist: null,
+    creativeDirector: null,
+    digitalStrategist: null,
+    pressAttache: null,
+    tourManager: null,
+    bodyguards: null,
   };
 
   const studio: Studio = {
     quality: 1,
     equipment: [],
     upgrades: [],
+    rooms: [],
+    soundFidelity: 50,
   };
 
   const fanbase: Fanbase = {
@@ -74,6 +81,13 @@ export const initializeNewGame = (artistName: string, stageName: string, genre: 
     tours: [],
     mediaEvents: [],
     awards: [],
+    contracts: [],
+    businessInvestments: [],
+    brandDeals: [],
+    fashionLines: [],
+    popupStores: [],
+    pressConferences: [],
+    retirementProgress: 0,
     lastSaved: Date.now(),
   };
 };
